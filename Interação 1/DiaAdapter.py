@@ -33,7 +33,7 @@ class DiaAdapter(LogicAdapter):
 
   def process(self, statement, _):
     dia = self.obter_dia(statement.text)
-    cliente = MongoClient("mongodb://localhost:27017")
+    cliente = MongoClient("mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb")
     db = cliente['chatterbot-database']
     aulasInfo = db.aulasInfo
     result = list(aulasInfo.find({'Dia': dia}))
