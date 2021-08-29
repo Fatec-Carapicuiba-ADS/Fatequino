@@ -1,6 +1,9 @@
 from pymongo import MongoClient
 from flask import send_file
 import json
+import os
+
+CURRENT_DIR, _ = os.path.split(os.path.abspath(__file__))
 
 # classe que trata as mensagens
 class FatequinoChatbot():
@@ -8,7 +11,7 @@ class FatequinoChatbot():
         self.bot = bot
         self.trainer = Trainer(self.bot)
         # carrega conversas que o bot ja entende
-        self.conversas = json.loads(open('conversas.json', 'r').read())
+        self.conversas = json.loads(open(os.path.join(CURRENT_DIR, 'conversas.json'), 'r').read())
         self.conversasDesconhecidas = []
 
     def treinarBot(self, conversa):
@@ -28,13 +31,13 @@ class FatequinoChatbot():
             # grava as conversas que o bot nao sabe responder em um arquivo
             if not (mensagemRecebida in self.conversas):
                 self.conversasDesconhecidas.append(mensagemRecebida)
-                with open('conversasSemResposta.json', 'w', encoding='utf-8') as gravarConversa:
+                with open(os.path.join(CURRENT_DIR, 'conversasSemResposta.json'), 'w', encoding='utf-8') as gravarConversa:
                     json.dump(self.conversasDesconhecidas, gravarConversa, ensure_ascii=False, indent=4, separators=(',', ':'))
                 return "Ainda não sei te responder sobre isso, mas irei pesquisar para conseguir te responder."
 
     # carrega dados inseridos pelo postman no banco de dados mongoDB
     def setHorarios(self, data):
-        cliente = MongoClient("mongodb://localhost:27017")
+        cliente = MongoClient("mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb")
         db = cliente['chatterbot-database']
         aulasInfo = db.aulasInfo
         aulasInfo.drop()
@@ -42,7 +45,7 @@ class FatequinoChatbot():
         return "Horários inseridos com sucesso"
     
     def setHorariosLocais(self, data):
-        cliente = MongoClient("mongodb://localhost:27017")
+        cliente = MongoClient("mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb")
         db = cliente['chatterbot-database']
         horarioLocal = db.horarioLocal
         horarioLocal.drop()
