@@ -26,7 +26,7 @@ class HorariosLocaisAdapter(LogicAdapter):
         from chatterbot.conversation import Statement
         import requests
 
-        cliente = MongoClient("mongodb://localhost:27017")
+        cliente = MongoClient("mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb")
         db = cliente['chatterbot-database']
         horarioLocal = db.horarioLocal
         result = horarioLocal.find({})
