@@ -37,8 +37,24 @@ class Hours(DAO):
 
     def create(self, data: dict) -> tuple:
         try:
-            query = 'INSERT INTO {0} ({1}) VALUES ({2})'.format(OPTIONS['TABLE'], ','.join(data.keys()), ','.join(data.values()))
+            query = 'INSERT INTO {0} ({1}) VALUES ({2})'.format(
+                OPTIONS['TABLE'], ','.join(data.keys()), ','.join(data.values()))
             row = self.sqlite.execute(query)
             return row
         except Exception as e:
             raise e
+
+    def to_json(self, data: tuple) -> dict:
+        result = {
+            "local": data[1],
+            "days": data[2],
+            "startTime": data[3],
+            "endTime": data[4],
+        }
+        return result
+
+    def to_json_list(self, data: list) -> list:
+        results = []
+        for row in data:
+            results.append(self.to_json(row))
+        return results

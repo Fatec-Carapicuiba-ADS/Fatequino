@@ -23,8 +23,9 @@ class WeekDayAdapter(LogicAdapter):
     def process(self, statement, _):
         week_day = self.__get_day(statement.text)
         rows = self.classes.find_all({"week_day": week_day})
-
-        if len(rows) == 0:
+        parsed_rows = self.classes.to_json_list(rows)
+ 
+        if len(parsed_rows) == 0:
             resp = Statement(text='{} não tem aulas, mas aproveite para estudar!'.format(
                 self.utils.get_week_day(week_day)))
             resp.confidence = 1
@@ -32,7 +33,7 @@ class WeekDayAdapter(LogicAdapter):
 
         message = '{} é dia de '.format(self.utils.get_week_day(week_day))
 
-        for row in rows:
+        for row in parsed_rows:
             message = '{} {} às {} para o ciclo {} com {} <br>'.format(
                 message, row['class'], row['startTime'], row['semester'], row['professor'])
 

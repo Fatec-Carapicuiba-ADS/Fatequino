@@ -1,3 +1,4 @@
+from typing import Any
 from src.database.sqlite.models.dao import DAO
 from src.database.sqlite.connection import SQLite
 
@@ -42,3 +43,23 @@ class Classes(DAO):
             return row
         except Exception as e:
             raise e
+    
+    def to_json(self, data: tuple) -> dict:
+        result = {
+            "class": data[1],
+            "course": data[2],
+            "period": data[3],
+            "semester": data[4],
+            "weekDay": data[5],
+            "startTime": data[6],
+            "professor": data[7],
+            "roomNumber": data[8],
+            "classPerDay": data[9]
+        }
+        return result
+
+    def to_json_list(self, data: list) -> list:
+        results = []
+        for row in data:
+            results.append(self.to_json(row))
+        return results

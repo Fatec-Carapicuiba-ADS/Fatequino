@@ -13,3 +13,11 @@ class DAO(ABC):
     @abstractmethod
     def create(self, data: dict, returning = '*') -> tuple:
         pass
+
+    @abstractmethod
+    def to_json(self, data: tuple) -> dict:
+        pass
+    
+    @abstractmethod
+    def to_json_list(self, data: list) -> list:
+        pass

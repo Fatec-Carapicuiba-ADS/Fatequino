@@ -44,7 +44,8 @@ class Create:
             week_day INTEGER NOT NUL,
             start_time DATETIME NOT NUL,
             professor VARCHAR(128) NOT NUL,
-            room_number BIGINT NOT NUL
+            room_number BIGINT NOT NUL,
+            class_per_day INTEGER NOT NULL
         )'''
 
         return script
