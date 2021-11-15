@@ -1,5 +1,5 @@
 class Utils():
-    def get_week_day(day: str):
+    def get_week_day(self, day: str):
         WEEK_DAYS = {
             "1": "Domingo",
             "2": "Segunda",
@@ -11,14 +11,14 @@ class Utils():
         }
         return WEEK_DAYS[day]
 
-    def remove_special_characters(text: str):
+    def remove_special_characters(self, text: str):
         replaced_text: str = text
         regex = "!@#$%¨&*()_-+={[}]:;?/\|"
         for x in regex:
             replaced_text = replaced_text.replace(x, '')
         return replaced_text
 
-    def remove_accent(text: str):
+    def remove_accent(self, text: str):
         replaced_text = text
         remove_a = "áãàâ"
         remove_e = "èéê"

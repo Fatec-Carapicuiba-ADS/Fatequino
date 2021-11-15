@@ -18,8 +18,8 @@ class Classes(DAO):
             for key in where:
                 criteria.append('{}=:{}'.format(key, key))
 
-            query = 'SELECT * FROM hours WHERE {} LIMIT 1'.format(' AND '.join(criteria))
-            row = self.sqlite.execute(query)
+            query = 'SELECT * FROM {0} WHERE {1} LIMIT 1'.format(OPTIONS['TABLE'], ' AND '.join(criteria))
+            row = self.sqlite.execute(query, where)
             return row
         except Exception as e:
             raise e
@@ -27,23 +27,27 @@ class Classes(DAO):
     def find_all(self, where: dict) -> tuple:
         criteria = []
         try:
+            query = 'SELECT * FROM {0}'.format(OPTIONS['TABLE'])
+
             for key in where:
                 criteria.append('{}=:{}'.format(key, key))
+            if where != {}:
+                query += ' WHERE {}'.format(' AND '.join(criteria))
 
-            query = 'SELECT * FROM {0} WHERE {1}'.format(OPTIONS['TABLE'], ' AND '.join(criteria))
-            row = self.sqlite.execute(query)
+            row = self.sqlite.execute(query, where)
             return row
         except Exception as e:
             raise e
 
     def create(self, data: dict) -> tuple:
         try:
-            query = 'INSERT INTO {0} ({1}) VALUES ({2})'.format(OPTIONS['TABLE'], ','.join(data.keys()), ','.join(data.values()))
-            row = self.sqlite.execute(query)
+            query = 'INSERT INTO {0} ({1}) VALUES ({2})'.format(OPTIONS['TABLE'], ','.join(
+                data.keys()), ','.join(list(map(lambda x: '\'{}\''.format(str(x)), data.values()))))
+            row = self.sqlite.execute_script(query)
             return row
         except Exception as e:
             raise e
-    
+
     def to_json(self, data: tuple) -> dict:
         result = {
             "class": data[1],

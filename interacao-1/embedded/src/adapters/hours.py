@@ -34,7 +34,7 @@ class HoursAdapter(LogicAdapter):
 
         for local in locals:
             message += 'A {} abre {} das {} às {} <br>'.format(
-                local['Local'], local['Dias'], local['HorarioInicio'], local['HorarioFim']
+                local['local'], local['days'], local['startTime'], local['endTime']
             )
 
         response_statement = Statement(text=message)

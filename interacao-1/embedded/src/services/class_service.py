@@ -1,5 +1,8 @@
 import json
+import os
 from src.database.sqlite.models.classes import Classes
+
+CURRENT_DIR, _ = os.path.split(os.path.abspath(__file__))
 
 
 class ClassService:
@@ -13,10 +16,10 @@ class ClassService:
             if len(data) > 0:
                 return data
 
-            classes = json.loads(open('../database/static/aulas.json', 'r').read())
+            classes = json.loads(open(os.path.join(CURRENT_DIR, '../database/static/aulas.json'), 'r').read())
             for _class in classes:
                 row = self.classes.create(self.__to_database_dict(_class))
-                data.append(self.classes.to_json(row))
+                data.append(row)
             return data
         except Exception as e:
             raise e

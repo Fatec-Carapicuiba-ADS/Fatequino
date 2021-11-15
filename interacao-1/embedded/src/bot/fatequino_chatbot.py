@@ -8,7 +8,7 @@ class FatequinoChatbot():
     def __init__(self, bot, Trainer):
         self.bot = bot
         self.trainer = Trainer(self.bot)
-        self.conversations = json.loads(open(os.path.join(CURRENT_DIR, './trainn/conversas.json'), 'r').read())
+        self.conversations = json.loads(open(os.path.join(CURRENT_DIR, 'trainn/conversas.json'), 'r').read())
         self.unknown_conversations = []
 
     def trainn_bot(self, talk):
@@ -23,7 +23,7 @@ class FatequinoChatbot():
         else:
             if not (received_message in self.conversations):
                 self.unknown_conversations.append(received_message)
-                with open(os.path.join(CURRENT_DIR, './trainn/conversasSemResposta.json'), 'w', encoding='utf-8') as save_conversation:
+                with open(os.path.join(CURRENT_DIR, 'trainn/conversasSemResposta.json'), 'w', encoding='utf-8') as save_conversation:
                     json.dump(self.unknown_conversations, save_conversation,
                               ensure_ascii=False, indent=4, separators=(',', ':'))
                 return "Ainda não sei te responder sobre isso, mas irei pesquisar para conseguir te responder."

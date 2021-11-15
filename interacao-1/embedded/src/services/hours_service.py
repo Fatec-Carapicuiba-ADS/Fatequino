@@ -6,7 +6,7 @@ CURRENT_DIR, _ = os.path.split(os.path.abspath(__file__))
 
 
 class HoursService:
-    def __ini__(self) -> None:
+    def __init__(self) -> None:
         self.hours = Hours()
 
     def create(self) -> list:
@@ -16,10 +16,11 @@ class HoursService:
             if len(data) > 0:
                 return data
 
-            hours = json.loads(open(os.path.join(CURRENT_DIR, '../database/static/horarios.json', 'r')).read())
-            for hour in hours:
-                row = self.classes.create(self.__to_database_dict(hour))
-                data.append(self.classes.to_json(row))
+            hours_data = json.loads(open(os.path.join(CURRENT_DIR, '../database/static/horarios.json'), 'r').read())
+            for hour in hours_data:
+                row = self.hours.create(self.__to_database_dict(hour))
+                print(row)
+                data.append(row)
             return data
         except Exception as e:
             raise e

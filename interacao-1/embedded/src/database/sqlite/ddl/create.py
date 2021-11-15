@@ -25,7 +25,7 @@ class Create:
     
     def __hours_ddl(self):
         script = '''CREATE TABLE IF NOT EXISTS hours(
-            id BIGINT PRIMARY KEY AUTOINCREMENT NOT NULL,
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             local VARCHAR(64) NOT NULL,
             days VARCHAR(64) NOT NULL,
             start_time DATETIME NOT NULL,
@@ -36,15 +36,15 @@ class Create:
     
     def __classes_ddl(self):
         script = '''CREATE TABLE IF NOT EXISTS classes(
-            id BIGINT PRIMARY KEY AUTOINCREMENT NOT NULL,
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             class VARCHAR(64) NOT NULL,
-            course VARCHAR(64) NOT NUL,
-            period VARCHAR(64) NOT NUL,
-            semester BIGINT NOT NUL,
-            week_day INTEGER NOT NUL,
-            start_time DATETIME NOT NUL,
-            professor VARCHAR(128) NOT NUL,
-            room_number BIGINT NOT NUL,
+            course VARCHAR(64) NOT NULL,
+            period VARCHAR(64) NOT NULL,
+            semester BIGINT NOT NULL,
+            week_day INTEGER NOT NULL,
+            start_time DATETIME NOT NULL,
+            professor VARCHAR(128) NOT NULL,
+            room_number BIGINT NOT NULL,
             class_per_day INTEGER NOT NULL
         )'''
 
