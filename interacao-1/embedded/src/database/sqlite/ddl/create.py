@@ -1,6 +1,7 @@
 from src.database.sqlite.connection import SQLite
 from sqlite3 import DatabaseError
 
+
 class Create:
     def __init__(self) -> None:
         self.sqlite = SQLite()
@@ -22,7 +23,16 @@ class Create:
             raise e
         except DatabaseError as dbe:
             raise dbe
-    
+
+    def unknown_questions(self):
+        try:
+            query = self.__unknown_questions_ddl()
+            self.sqlite.execute_script(query)
+        except Exception as e:
+            raise e
+        except DatabaseError as dbe:
+            raise dbe
+
     def __hours_ddl(self):
         script = '''CREATE TABLE IF NOT EXISTS hours(
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -33,7 +43,7 @@ class Create:
         )'''
 
         return script
-    
+
     def __classes_ddl(self):
         script = '''CREATE TABLE IF NOT EXISTS classes(
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -46,6 +56,14 @@ class Create:
             professor VARCHAR(128) NOT NULL,
             room_number BIGINT NOT NULL,
             class_per_day INTEGER NOT NULL
+        )'''
+
+        return script
+
+    def __unknown_questions_ddl(self):
+        script = '''CREATE TABLE IF NOT EXISTS unknown_questions(
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            quetion VARCHAR(364) NOT NULL
         )'''
 
         return script

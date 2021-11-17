@@ -50,6 +50,7 @@ class Main (object):
     def __create_db_tables(self) -> None:
         self.create_table.classes()
         self.create_table.hours()
+        self.create_table.unknown_questions()
 
     def __create_db_indexes(self):
         self.index.create()
