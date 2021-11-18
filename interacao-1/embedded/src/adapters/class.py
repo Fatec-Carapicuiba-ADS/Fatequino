@@ -46,7 +46,7 @@ class ClassAdapter(LogicAdapter):
         for _class in classes:
             week_day = self.utils.get_week_day(_class['weekDay'])
 
-            message += 'A disciplina {} ocorreu toda(o) {} às {} com o(a) professor(a) {} na sala {}. São {} aulas <br>'.format(
+            message += 'A disciplina {} ocorreu toda(o) {} às {} com o(a) professor(a) {} na sala {}. São {} aulas, '.format(
                 _class['class'], week_day, _class['startTime'], _class['professor'], _class['roomNumber'], _class['classPerDay']
             )
 

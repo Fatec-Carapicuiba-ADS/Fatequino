@@ -18,9 +18,9 @@ class FatequinoChatbot():
 
     def sent_message(self, received_message):
         if (float(self.bot.get_response(received_message).confidence) > 0.5):
-            return self.bot.get_response(received_message)
+            return str(self.bot.get_response(received_message))
         if received_message in self.conversations:
-            return self.bot.get_response(received_message)
+            return str(self.bot.get_response(received_message))
         else:
             if not (received_message in self.conversations):
                 self.unknown_questions.create(received_message)

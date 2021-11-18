@@ -11,6 +11,7 @@ from src.services.class_service import ClassService
 from src.services.hours_service import HoursService
 from src.commons.utils import Utils
 from src.commons.constants import LOGGER
+from src.speech.FatequinoInterpreter import FatequinoInterpreter
 
 
 logging.Formatter(LOGGER['FORMAT'])
@@ -28,6 +29,7 @@ class Main (object):
         self.utils = Utils()
         self.bot = None
         self.fatequino = None
+        self.voice_interpreter = FatequinoInterpreter()
 
     def run(self):
         try:
@@ -114,18 +116,16 @@ class Main (object):
                 question = str(input(">>>>>: "))
 
                 if question == ALLOWED_OPTIONS[0]:
-                    print(fatequino.sent_message('tem aula hoje'))
+                    self.voice_interpreter.speak(fatequino.sent_message('tem aula hoje'))
                 elif question == ALLOWED_OPTIONS[1]:
-                    print(fatequino.sent_message('Onde fica a secretaria?'))
+                    self.voice_interpreter.speak(fatequino.sent_message('Onde fica a secretaria?'))
                 elif question == ALLOWED_OPTIONS[2]:
-                    print(fatequino.sent_message('quando abre a biblioteca'))
-                elif question == ALLOWED_OPTIONS[3]:
-                    print(fatequino.sent_message('arquivos fatec'))
+                    self.voice_interpreter.speak(fatequino.sent_message('quando abre a biblioteca'))
                 elif question == ALLOWED_OPTIONS[4]:
-                    question = input("Qual a sua dúvida? ")
+                    question = self.voice_interpreter.process_question()
                     question = self.utils.remove_special_characters(question)
                     question = self.utils.remove_accent(question)
-                    print(self.fatequino.sent_message(question))
+                    self.voice_interpreter.speak(fatequino.sent_message(question))
                 else:
                     print('Ops, não entendi sua opção, poderia digitar novamente?\n')
         except KeyboardInterrupt as e:

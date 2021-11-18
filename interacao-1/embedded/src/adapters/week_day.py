@@ -34,7 +34,7 @@ class WeekDayAdapter(LogicAdapter):
         message = '{} é dia de '.format(self.utils.get_week_day(week_day))
 
         for row in parsed_rows:
-            message = '{} {} às {} para o ciclo {} com {} <br>'.format(
+            message = '{} {} às {} para o ciclo {} com {}, '.format(
                 message, row['class'], row['startTime'], row['semester'], row['professor'])
 
         message.replace(',', '.', len(message) - 1)

@@ -33,7 +33,7 @@ class HoursAdapter(LogicAdapter):
         message = ''
 
         for local in locals:
-            message += 'A {} abre {} das {} às {} <br>'.format(
+            message += 'A {} abre {} das {} às {}, '.format(
                 local['local'], local['days'], local['startTime'], local['endTime']
             )
 

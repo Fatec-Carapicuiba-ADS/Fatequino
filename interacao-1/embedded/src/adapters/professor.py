@@ -34,7 +34,7 @@ class ProfessorAdapter(LogicAdapter):
         for professor in professors:
             week_day = self.utils.get_week_day(professor['weekDay'])
 
-            message += 'O(a) professor(a) {} leciona {} na {} às {} na sala {} <br>'.format(
+            message += 'O(a) professor(a) {} leciona {} na {} às {} na sala {}, '.format(
                 professor['professor'], professor['class'], week_day, professor['startTime'], professor['roomNumber']
             )
 

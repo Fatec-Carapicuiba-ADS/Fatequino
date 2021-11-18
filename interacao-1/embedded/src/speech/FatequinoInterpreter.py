@@ -13,23 +13,18 @@ class FatequinoInterpreter:
     def __init__(self):
         self.speech_recognizer = sr.Recognizer()
     
-    def process_question(self):
+    def process_question(self) -> str:
+        self.speak("Estou te escutando. Aguarde um pouco para eu ajustar meu sistema auditivo.")
+        
         sentence = self.listen_to_speech(10)
         
-        if sentence.lower() in STARTING_POINT_WORDS:
-            self.speak("Estou te escutando")
-            
+        while not sentence:
             sentence = self.listen_to_speech(10)
-            
-            while not sentence:
-                sentence = self.listen_to_speech(10)
 
-            if sentence:
-                self.speak("Vou pensar na resposta e já te retorno...")
-                # Processamento...
-                self.speak(f"Sua pergunta é: {sentence}")
-        else:
-            self.speak("Para começar a falar comigo, diga a palavra 'iniciar' primeiro")
+        if sentence:
+            self.speak("Vou pensar na resposta e já te retorno...")
+        
+        return sentence
 
     def listen_to_speech(self, phrase_time_limit: int=None) -> Union[str, None]:
         sentence = ''
