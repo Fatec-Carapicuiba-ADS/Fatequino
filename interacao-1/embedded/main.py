@@ -111,6 +111,7 @@ class Main (object):
         print('3 - Quando abre a biblioteca?\n')
         print('4 - Arquivos Fatec\n')
         print('0 - Pergunte-me algo\n')
+
         try:
             while True:
                 question = str(input(">>>>>: "))
@@ -135,3 +136,7 @@ class Main (object):
 if __name__ == "__main__":
     main = Main()
     main.run()
+
+# If you're running on Linux, you will need to run thw following commands before installing the requirements:
+# sudo apt install portaudio19-dev python3-pyaudio
+# sudo apt-get install mpg321
