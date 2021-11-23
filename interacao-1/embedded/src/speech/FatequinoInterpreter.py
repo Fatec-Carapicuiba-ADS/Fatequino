@@ -2,10 +2,12 @@ from subprocess import call
 from typing import Union
 import speech_recognition as sr
 from gtts import gTTS
+import os
 
 PORTUGESE_LANGUAGE = 'pt-BR'
 STARTING_POINT_WORDS = ("iniciar",)
 AUDIO_FILE_NAME = "response.mp3"
+OS_AUDIO_INTERPRETER = os.getenv("OS_AUDIO_INTERPRETER") if os.getenv("OS_AUDIO_INTERPRETER") is not None else "mpg123"
 
 
 class FatequinoInterpreter:
@@ -47,7 +49,7 @@ class FatequinoInterpreter:
 
         return sentence
     
-    def speak(self, text: str, language: str='pt', os_audio_interpreter: str="mpg321"):
+    def speak(self, text: str, language: str='pt', os_audio_interpreter: str=OS_AUDIO_INTERPRETER):
         text_to_be_said = gTTS(text=text, lang=language, slow=False)
         text_to_be_said.save(AUDIO_FILE_NAME)
         call(f"{os_audio_interpreter} {AUDIO_FILE_NAME}", shell=True)

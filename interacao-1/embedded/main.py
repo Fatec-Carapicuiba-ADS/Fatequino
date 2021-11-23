@@ -102,14 +102,13 @@ class Main (object):
 
     def __menu(self) -> None:
         fatequino = self.__get_fatequino()
-        ALLOWED_OPTIONS = ['1', '2', '3', '4', '0']
+        ALLOWED_OPTIONS = ['1', '2', '3', '0']
 
         print('Olá eu sou o Fatequino.\n')
         print('Tenho aqui algumas sugestões de perguntas. Pressione o número correspondete a sugestão ou se preferir presione 0 para perguntar!\n\n')
         print('1 - Tem aula hoje?\n')
         print('2 - Onde fica a secretaria?\n')
         print('3 - Quando abre a biblioteca?\n')
-        print('4 - Arquivos Fatec\n')
         print('0 - Pergunte-me algo\n')
 
         try:
@@ -122,7 +121,7 @@ class Main (object):
                     self.voice_interpreter.speak(fatequino.sent_message('Onde fica a secretaria?'))
                 elif question == ALLOWED_OPTIONS[2]:
                     self.voice_interpreter.speak(fatequino.sent_message('quando abre a biblioteca'))
-                elif question == ALLOWED_OPTIONS[4]:
+                elif question == ALLOWED_OPTIONS[3]:
                     question = self.voice_interpreter.process_question()
                     question = self.utils.remove_special_characters(question)
                     question = self.utils.remove_accent(question)
